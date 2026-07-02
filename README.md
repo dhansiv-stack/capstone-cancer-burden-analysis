@@ -2,74 +2,137 @@
 
 ## Project Overview
 
-This capstone project analyzes major cancer burden in the United States using cancer incidence, mortality, survival, healthcare cost, machine learning, dashboard visualization, and Retrieval-Augmented Generation (RAG).
+This capstone project investigates the burden of major cancers in the United States by integrating national cancer surveillance, survival outcomes, healthcare costs, machine learning, and Retrieval-Augmented Generation (RAG).
 
-The project combines Python, SQL, R Shiny, machine learning, and generative AI to explore which cancers create the highest burden and why.
+The project combines Python, SQL, R Shiny, machine learning, and generative AI to identify high-burden cancers, visualize population-level trends, and develop an AI-powered Cancer Intelligence Assistant capable of answering cancer-related questions using trusted medical literature.
+
+---
 
 ## Research Objectives
 
 - Analyze cancer incidence, mortality, survival, and healthcare costs.
 - Identify high-burden cancer groups using machine learning.
-- Build an interactive R Shiny dashboard.
-- Develop a Cancer Intelligence Assistant using RAG.
+- Develop an interactive R Shiny dashboard for cancer burden visualization.
+- Build a Retrieval-Augmented Generation (RAG) system for evidence-based cancer question answering.
+
+---
 
 ## Data Sources
 
-- CDC United States Cancer Statistics
-- SEER survival data
-- Cancer cost data
-- National Cancer Institute PDQ summaries
-- American Cancer Society Cancer Facts & Figures 2025
-- Cancer Patient Economic Burden report
+- CDC United States Cancer Statistics (USCS)
+- SEER (Surveillance, Epidemiology, and End Results)
+- National Cancer Institute (NCI) PDQ Cancer Information Summaries
+- American Cancer Society – Cancer Facts & Figures 2025
+- National Cancer Institute Cancer Economic Burden Reports
+
+---
 
 ## Technologies
 
 - Python
-- SQL / PostgreSQL
+- SQL (PostgreSQL)
 - R / R Shiny
 - Pandas
+- NumPy
 - Scikit-learn
 - SciPy
+- Matplotlib
 - LangChain
 - FAISS
-- Hugging Face
-- Sentence Transformers
+- Hugging Face Sentence Transformers
 - Jupyter Notebook
+
+---
 
 ## Machine Learning Workflow
 
-The machine learning workflow uses hierarchical clustering to group cancers based on burden-related features such as incidence, mortality, survival, mortality-to-incidence ratio, and healthcare cost variables.
+The machine learning component applies hierarchical clustering (Ward linkage) to identify groups of cancers with similar burden characteristics based on:
 
-## R Shiny Dashboard
+- Incidence
+- Mortality
+- Five-year survival
+- Mortality-to-incidence ratio
+- Initial care cost
+- Continuing care cost
+- Last-year-of-life care cost
 
-The dashboard presents cancer burden patterns through interactive visualizations, survival trends, mortality comparisons, machine learning cluster results, and research insights.
+---
 
-## Cancer Intelligence Assistant
+## Interactive R Shiny Dashboard
 
-The RAG pipeline uses cancer-specific documents and literature reports to retrieve relevant scientific context before generating answers to cancer-related questions.
+The dashboard provides interactive visualizations including:
 
-The RAG workflow includes:
+- Cancer incidence and mortality
+- Survival trends
+- Machine learning clustering results
+- Research insights
+- Cancer-specific exploration
+
+---
+
+## Cancer Intelligence Assistant (RAG)
+
+The project includes a Retrieval-Augmented Generation (RAG) pipeline that combines cancer-specific knowledge documents with authoritative literature.
+
+### Knowledge Sources
+
+- Nine NCI PDQ cancer knowledge documents
+- American Cancer Society – Cancer Facts & Figures 2025
+- Cancer Patient Economic Burden Report
+
+### RAG Workflow
 
 - Document loading
 - Document chunking
-- Embedding generation
+- Sentence embeddings
 - FAISS vector database
 - Semantic retrieval
-- LLM-based question answering
+- Large Language Model (LLM) question answering
+
+---
 
 ## Current Status
 
-- Data integration completed
-- Machine learning clustering completed
-- R Shiny dashboard completed
-- Cancer knowledge corpus completed
-- RAG pipeline in progress
+- ✅ Data integration completed
+- ✅ Machine learning clustering completed
+- ✅ Interactive R Shiny dashboard completed
+- ✅ Cancer knowledge corpus completed
+- ✅ RAG pipeline implementation completed
+- 🔄 LLM-powered question answering in progress
+
+---
+
+## Repository Structure
+
+```
+capstone-cancer-burden-analysis/
+│
+├── notebooks/
+├── data/
+│   └── RAG_files/
+├── Shinny_app/
+│   └── Cancer_Burden_Dashboard/
+└── README.md
+```
+
+---
+
+## Future Work
+
+- Integrate RetrievalQA chain
+- Deploy the Cancer Intelligence Assistant
+- Expand the cancer knowledge corpus
+- Add source citations to generated answers
+- Deploy the complete application
+
+---
 
 ## Author
 
-Sivaraja Vaithiyalingam  
-Data Scientist Apprentice  
-Nashville Software School  
+**Sivaraja Vaithiyalingam**
 
-GitHub: https://github.com/dhansiv-stack  
-LinkedIn: https://www.linkedin.com/in/sivaraja-vaithiyalingam
+Data Scientist Apprentice  
+Nashville Software School
+
+- GitHub: https://github.com/dhansiv-stack
+- LinkedIn: https://www.linkedin.com/in/sivaraja-vaithiyalingam
