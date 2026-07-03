@@ -135,12 +135,27 @@ ui <- fluidPage(
           plotOutput(
             "mortality_progress_plot",
             height = "500px"
+            
           )
+        ),
+        
+        tabPanel(
+          "Final Conclusion",
+          
+          h3("Final Project Conclusion"),
+          
+          br(),
+          
+          uiOutput("final_conclusion")
+        )
+          
+          
         )
       )
     )
   )
-)
+
+
 
 server <- function(input, output) {
   
@@ -697,51 +712,41 @@ server <- function(input, output) {
       theme_minimal(base_size = 15) +
       
       theme(
-        
         legend.position = "bottom",
-        
-        legend.margin = margin(
-          t = 12
-        ),
-        
-        plot.margin = margin(
-          t = 10,
-          r = 10,
-          b = 35,
-          l = 10
-        ),
-        
-        plot.title = element_text(
-          face = "bold",
-          size = 18,
-          hjust = 0.5
-        ),
-        
-        plot.subtitle = element_text(
-          size = 14,
-          hjust = 0.5
-        ),
-        
-        axis.title = element_text(
-          face = "bold",
-          size = 15
-        ),
-        
-        axis.text = element_text(
-          face = "bold",
-          size = 15,
-          color = "black"
-        ),
-        
-        axis.line = element_line(
-          color = "black",
-          linewidth = 0.8
-        ),
-        
+        legend.margin = margin(t = 12),
+        plot.margin = margin(t = 10, r = 10, b = 35, l = 10),
+        plot.title = element_text(face = "bold", size = 18, hjust = 0.5),
+        plot.subtitle = element_text(size = 14, hjust = 0.5),
+        axis.title = element_text(face = "bold", size = 15),
+        axis.text = element_text(face = "bold", size = 15, color = "black"),
+        axis.line = element_line(color = "black", linewidth = 0.8),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()
       )
+    
+  }, height = 500)
+  
+  output$final_conclusion <- renderUI({
+    HTML("
+      <h4>Overall Conclusion</h4>
+      <p>
+      This project shows that cancer burden cannot be explained by incidence alone.
+      Integrating incidence, mortality, survival, cost, machine learning, and literature-based evidence provides a more complete view of cancer burden.
+      </p>
+      
+      <h4>Key Findings</h4>
+      <ul>
+        <li>Pancreatic, liver, and lung cancers emerged as high-burden cancers due to poor survival and high mortality impact.</li>
+        <li>Breast and prostate cancers showed high incidence but better survival outcomes, likely reflecting early detection and effective treatment pathways.</li>
+        <li>Non-Hodgkin Lymphoma showed that high survival does not always mean low burden because continuing-care and end-of-life costs remain substantial.</li>
+        <li>The RAG pipeline adds scientific interpretation by connecting dashboard findings to trusted cancer literature.</li>
+      </ul>
+      
+      <h4>Future Direction</h4>
+      <p>
+      Future work will integrate the Cancer Intelligence Assistant into the dashboard so users can ask evidence-based questions about cancer burden, diagnosis challenges, prevention, treatment, and economic impact.
+      </p>
+    ")
   })
 }
-
 shinyApp(ui = ui, server = server)
