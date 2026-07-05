@@ -21,140 +21,141 @@ ui <- fluidPage(
   
   titlePanel("Cancer Burden & Research Insights Dashboard"),
   
-  sidebarLayout(
+  tabsetPanel(
     
-    sidebarPanel(
-      selectInput(
-        inputId = "cancer",
-        label = "Select Cancer Type:",
-        choices = cancer_data$cancer_type
-      )
-    ),
-    
-    mainPanel(
+    tabPanel(
+      "Overview",
       
-      tabsetPanel(
+      wellPanel(
+        h3("Project Overview & Features"),
+        p("This interactive dashboard integrates CDC incidence and mortality data, SEER survival statistics, healthcare expenditure analysis, machine learning clustering, and a Retrieval-Augmented Generation (RAG) AI assistant to support evidence-based exploration of cancer burden in the United States.")
+      ),
+      
+      sidebarLayout(
+        sidebarPanel(
+          selectInput(
+            inputId = "cancer",
+            label = "Select Cancer Type:",
+            choices = unique(cancer_data$cancer_type)
+          )
+        ),
         
-        tabPanel(
-          "Overview",
-          
-          h3("Selected Cancer"),
-          textOutput("selected_cancer"),
-          
-          br(),
+        mainPanel(
           h4("Mortality-to-Incidence Ratio"),
-          plotOutput("mortality_plot"),
+          plotOutput("mortality_plot", height = "600px"),
           
           br(),
           h4("Research Insights"),
           uiOutput("research_insights")
-        ),
-        
-        
-        tabPanel(
-          "ML Validation",
-          
-          h4("Machine Learning Cancer Burden Clusters"),
-          
-          tableOutput("ml_cluster_table"),
-          
-          br(),
-          
-          h4("Hierarchical Clustering Dendrogram"),
-          
-          img(
-            src = "dendrogram.png",
-            width = "100%"
-          ),
-          
-          br(),
-          
-          h4("Interpretation"),
-          uiOutput("ml_interpretation")
-        ),
-        
-        
-        tabPanel(
-          "Economic Burden",
-          
-          h4("Cancer Care Costs by Cancer Type"),
-          
-          plotOutput(
-            "cost_plot",
-            height = "700px"
-          ),
-          
-          br(),
-          
-          fluidRow(
-            
-            column(
-              8,
-              
-              plotOutput(
-                "cost_vs_mortality",
-                height = "550px"
-              )
-              
-            ),
-            
-            column(
-              4,
-              
-              h4("RAG-Based Economic Interpretation"),
-              
-              uiOutput("economic_rag_insight")
-              
-            )
-            
-          )
-        
-        ),
-        
-        
-        tabPanel(
-          "Progress & Future Opportunities",
-          
-          tags$h3(
-            style = "font-weight: bold;",
-            "Panel A: Five-Year Survival Trends, 1999–2018"
-          ),
-          
-          plotOutput(
-            "survival_trend_plot",
-            height = "650px"
-          ),
-          
-          br(),
-          
-          tags$h3(
-            style = "font-weight: bold;",
-            "Panel B: Change in Mortality-to-Incidence Ratio, 1999–2023"
-          ),
-          
-          plotOutput(
-            "mortality_progress_plot",
-            height = "500px"
-            
-          )
-        ),
-        
-        tabPanel(
-          "Final Conclusion",
-          
-          h3("Final Project Conclusion"),
-          
-          br(),
-          
-          uiOutput("final_conclusion")
-        )
-          
-          
         )
       )
+    ),
+    
+    tabPanel(
+      "ML Validation",
+      
+      h4("Machine Learning Cancer Burden Clusters"),
+      tableOutput("ml_cluster_table"),
+      
+      br(),
+      
+      wellPanel(
+        h4(
+          style = "text-align:center; color:#1F4E79;",
+          "Machine Learning Interpretation"
+        ),
+        uiOutput("ml_interpretation")
+      ),
+      
+      br(),
+      
+      h4("Hierarchical Clustering Dendrogram"),
+      
+      div(
+        style = "text-align:center;",
+        img(
+          src = "dendrogram.png",
+          width = "60%"
+        ),
+        p(
+          style = "text-align:center; font-style:italic;",
+          "Figure: Hierarchical clustering of cancer types based on incidence, mortality, survival, and healthcare expenditure."
+        )
+      )
+    ),
+    
+    tabPanel(
+      "Economic Burden",
+      
+      h4("Cancer Care Costs by Cancer Type"),
+      plotOutput("cost_plot", height = "700px"),
+      
+      br(),
+      
+      fluidRow(
+        column(
+          8,
+          plotOutput("cost_vs_mortality", height = "550px")
+        ),
+        column(
+          4,
+          h4("RAG-Based Economic Interpretation"),
+          uiOutput("economic_rag_insight")
+        )
+      )
+    ),
+    
+    tabPanel(
+      "Progress & Future Opportunities",
+      
+      tags$h3(
+        style = "font-weight: bold;",
+        "Panel A: Five-Year Survival Trends, 1999–2018"
+      ),
+      plotOutput("survival_trend_plot", height = "650px"),
+      
+      br(),
+      
+      tags$h3(
+        style = "font-weight: bold;",
+        "Panel B: Change in Mortality-to-Incidence Ratio, 1999–2023"
+      ),
+      plotOutput("mortality_progress_plot", height = "500px")
+    ),
+    
+    tabPanel(
+      "Final Conclusion",
+      h3("Final Project Conclusion"),
+      br(),
+      uiOutput("final_conclusion")
+    ),
+    
+    tabPanel(
+      "Cancer AI Assistant",
+      
+      h3("🤖 Cancer AI Assistant"),
+      
+      p(
+        "Ask questions about cancer incidence, survival, diagnosis, treatment, or healthcare costs. Answers are generated using the project's curated knowledge base."
+      ),
+      
+      textAreaInput(
+        inputId = "rag_question",
+        label = NULL,
+        rows = 6,
+        width = "100%",
+        placeholder = "Example: Which cancer has the greatest healthcare burden and why?"
+      ),
+      
+      actionButton("ask_rag", "Ask AI"),
+      
+      br(),
+      br(),
+      
+      uiOutput("rag_answer")
     )
   )
-
+)
 
 
 server <- function(input, output) {
