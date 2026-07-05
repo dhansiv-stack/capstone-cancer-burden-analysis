@@ -2,6 +2,14 @@ library(shiny)
 library(tidyverse)
 library(scales)
 library(ggrepel)
+library(reticulate)
+
+use_python(
+  "C:/ProgramData/anaconda3/python.exe",
+  required = TRUE
+)
+
+source_python("rag_pipeline.py")
 
 # Load data
 cancer_survival_data <- read.csv(
@@ -748,6 +756,46 @@ server <- function(input, output) {
       Future work will integrate the Cancer Intelligence Assistant into the dashboard so users can ask evidence-based questions about cancer burden, diagnosis challenges, prevention, treatment, and economic impact.
       </p>
     ")
+  })
+  
+  rag_result <- reactiveVal(NULL)
+  
+  observeEvent(input$ask_rag, {
+    
+    question <- input$rag_question
+    
+    if (is.null(question) || question == "") {
+      rag_result("<b>Please enter a question.</b>")
+      return()
+    }
+    
+    print(paste("RAG question:", question))
+    
+    answer <- tryCatch(
+      {
+        ask_cancer_question(question)
+      },
+      error = function(e) {
+        paste("ERROR:", e$message)
+      }
+    )
+    
+    print(answer)
+    
+    rag_result(answer)
+  })
+  
+  output$rag_answer <- renderUI({
+    
+    req(rag_result())
+    
+    HTML(
+      paste0(
+        "<div style='background-color:#f8f9fa; padding:15px; border-radius:8px;'>",
+        gsub("\n", "<br>", rag_result()),
+        "</div>"
+      )
+    )
   })
 }
 shinyApp(ui = ui, server = server)
