@@ -66,18 +66,41 @@ data and curated medical literature.
 
 ## Repository Structure
 
-    notebooks/
-      Capstone_Project_Sivaraja.ipynb  - Main analysis
-      cancer_burden_ml.ipynb           - ML workflow
-      cancer_cdc_ml.ipynb              - CDC preprocessing
-      RAG_Exercise.ipynb               - RAG prototype
-
-    data/
-      master_cancer_summary.csv        - Integrated dataset
-
-    Shinny_app/Cancer_Burden_Dashboard/
-      app.R                            - Dashboard
-      rag_pipeline.py                  - AI Assistant
+capstone-cancer-burden-analysis/
+│
+├── README.md
+├── requirements.txt
+│
+├── data/
+│   ├── master_cancer_summary.csv
+│   ├── cdc_outcomes_data.csv
+│   ├── cancer_survival_trends.csv
+│   ├── mortality_incidence_progress.csv
+│   └── faiss_cancer_index/
+│
+├── notebooks/
+│   ├── Capstone_Project_Sivaraja.ipynb
+│   │   └── Main end-to-end cancer burden analysis
+│   │
+│   ├── cancer_burden_ml.ipynb
+│   │   └── Machine learning and hierarchical clustering
+│   │
+│   └── cancer_cdc_ml.ipynb
+│       └── CDC data preparation and preprocessing
+│
+├── Shinny_app/
+│   └── Cancer_Burden_Dashboard/
+│       ├── app.R
+│       │   └── Interactive R Shiny dashboard
+│       │
+│       ├── rag_pipeline.py
+│       │   └── AI-powered Cancer Intelligence Assistant
+│       │
+│       ├── data/
+│       └── www/
+│
+└── PostgreSQL/
+    └── SQL scripts and database resources
 
 ## Machine Learning
 
