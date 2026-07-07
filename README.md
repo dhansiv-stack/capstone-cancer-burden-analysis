@@ -56,13 +56,13 @@ data and curated medical literature.
 
 ## Technology Stack
 
-**Programming & Data Engineering:** Python, PostgreSQL, R
-
-**Machine Learning:** Pandas, NumPy, Scikit-learn, SciPy
-
-**Visualization:** R Shiny, ggplot2, dplyr
-
-**AI:** LangChain, FAISS, Sentence Transformers, OpenRouter LLM
+- **Programming Languages:** Python, R
+- **Database:** PostgreSQL
+- **Python Libraries:** Pandas, NumPy, SciPy
+- **Machine Learning:** Scikit-learn
+- **Visualization:** Matplotlib, ggplot2
+- **Dashboard:** R Shiny
+- **Generative AI:** LangChain, FAISS, Sentence Transformers, OpenRouter LLM
 
 ## Repository Structure
 
