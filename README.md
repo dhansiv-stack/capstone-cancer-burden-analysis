@@ -56,7 +56,7 @@ data and curated medical literature.
 
 ## Technology Stack
 
-**Programming & Data Engineering:** Python, SQL, PostgreSQL, R
+**Programming & Data Engineering:** Python, PostgreSQL, R
 
 **Machine Learning:** Pandas, NumPy, Scikit-learn, SciPy
 
