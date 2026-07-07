@@ -66,6 +66,7 @@ data and curated medical literature.
 
 ## Repository Structure
 
+```text
 capstone-cancer-burden-analysis/
 │
 ├── README.md
@@ -80,28 +81,20 @@ capstone-cancer-burden-analysis/
 │
 ├── notebooks/
 │   ├── Capstone_Project_Sivaraja.ipynb
-│   │   └── Main end-to-end cancer burden analysis
-│   │
 │   ├── cancer_burden_ml.ipynb
-│   │   └── Machine learning and hierarchical clustering
-│   │
 │   └── cancer_cdc_ml.ipynb
-│       └── CDC data preparation and preprocessing
 │
 ├── Shinny_app/
 │   └── Cancer_Burden_Dashboard/
 │       ├── app.R
-│       │   └── Interactive R Shiny dashboard
-│       │
 │       ├── rag_pipeline.py
-│       │   └── AI-powered Cancer Intelligence Assistant
-│       │
 │       ├── data/
 │       └── www/
 │
-└── PostgreSQL/
-    └── SQL scripts and database resources
-
+├── PostgreSQL/
+│
+└── README.md
+```
 ## Machine Learning
 
 Hierarchical clustering grouped cancers into High, Moderate, and Lower
