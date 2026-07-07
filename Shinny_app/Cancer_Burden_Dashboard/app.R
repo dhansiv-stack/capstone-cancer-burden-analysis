@@ -789,13 +789,22 @@ server <- function(input, output) {
     
     req(rag_result())
     
-    HTML(
-      paste0(
-        "<div style='background-color:#f8f9fa; padding:15px; border-radius:8px;'>",
-        gsub("\n", "<br>", rag_result()),
-        "</div>"
-      )
+    formatted_text <- gsub("\n- ", "\n• ", rag_result())
+    
+    div(
+      style = "
+      background:#f8f9fa;
+      border-left:5px solid #2E86C1;
+      padding:15px;
+      border-radius:8px;
+      font-size:16px;
+      line-height:1.6;
+      color:#333333;
+      white-space: pre-wrap;
+    ",
+      formatted_text
     )
+    
   })
 }
 shinyApp(ui = ui, server = server)

@@ -1,10 +1,10 @@
-"cancer_type","diagnosis_challenge","incidence","mortality","survival","mortality_ratio","initial_care","continuing_care","last_year_of_life"
-"Pancreas","High","12.06","9.97","0.09","0.83","108166","18427","125031"
-"Liver and Intrahepatic Bile Duct","High","11.06","8.33","0.19","0.75","62776","18219","92134"
-"Lung and Bronchus","Moderate-High","53.77","37.13","0.21","0.69","68293","12389","110248"
-"Colon and Rectum","Moderate","43.11","15.47","0.67","0.36","66524","6246","110144"
-"Non-Hodgkin Lymphoma","Moderate","16.39","5.07","0.73","0.31","75164","12805","144707"
-"Urinary Bladder","Moderate","14.81","3.43","0.80","0.23","26443","6350","95985"
-"Prostate","Low","127.66","23.34","0.99","0.18","28109","2603","74227"
-"Female Breast","Low","110.44","19.30","0.92","0.17","34980","3540","76101"
-"Melanomas of the Skin","Low","8.53","1.24","0.95","0.15","8537","2707","78912"
+cancer_type,diagnosis_challenge,incidence,mortality,survival,mortality_ratio,initial_care,continuing_care,last_year_of_life,cluster,ml_cluster
+Pancreas,High,12.06,9.97,0.09,0.83,108166,18427,125031,1,High Burden Cluster
+Liver and Intrahepatic Bile Duct,High,11.06,8.33,0.19,0.75,62776,18219,92134,1,High Burden Cluster
+Lung and Bronchus,Moderate-High,53.77,37.13,0.21,0.69,68293,12389,110248,1,High Burden Cluster
+Colon and Rectum,Moderate,43.11,15.47,0.67,0.36,66524,6246,110144,3,Moderate Burden Cluster
+Non-Hodgkin Lymphoma,Moderate,16.39,5.07,0.73,0.31,75164,12805,144707,3,Moderate Burden Cluster
+Urinary Bladder,Moderate,14.81,3.43,0.8,0.23,26443,6350,95985,3,Moderate Burden Cluster
+Prostate,Low,127.66,23.34,0.99,0.18,28109,2603,74227,2,Lower Burden Cluster
+Female Breast,Low,110.44,19.3,0.92,0.17,34980,3540,76101,2,Lower Burden Cluster
+Melanomas of the Skin,Low,8.53,1.24,0.95,0.15,8537,2707,78912,3,Moderate Burden Cluster
