@@ -26,6 +26,21 @@ PROJECT_DATA_PATH = BASE_DIR / "data" / "master_cancer_summary.csv"
 
 cancer_data = pd.read_csv(PROJECT_DATA_PATH)
 
+cancer_data["prob_survive_5yr"] = cancer_data["survival"]
+cancer_data["prob_not_survive_5yr"] = 1 - cancer_data["survival"]
+
+# Create probability context for AI assistant
+probability_context = "\n".join(
+    cancer_data.apply(
+        lambda row: (
+            f"{row['cancer_type']}: "
+            f"5-year survival probability = {row['prob_survive_5yr']}, "
+            f"5-year non-survival probability = {row['prob_not_survive_5yr']}"
+        ),
+        axis=1
+    )
+)
+
 cancer_data["total_healthcare_cost"] = (
     cancer_data["initial_care"] +
     cancer_data["continuing_care"] +
@@ -36,6 +51,23 @@ cancer_data = cancer_data.sort_values(
     "total_healthcare_cost",
     ascending=False
 )
+
+# --------------------------------------------------
+# Project statistical analysis
+# --------------------------------------------------
+
+survival_cost_corr = cancer_data["survival"].corr(
+    cancer_data["total_healthcare_cost"]
+)
+
+mortality_cost_corr = cancer_data["mortality"].corr(
+    cancer_data["total_healthcare_cost"]
+)
+
+survival_mortality_ratio_corr = cancer_data["survival"].corr(
+    cancer_data["mortality_ratio"]
+)
+
 # ==========================================================
 # Initialize LLM and Vector Store
 # ==========================================================
@@ -158,6 +190,25 @@ def get_project_context(question):
 
     if len(matched_cancers) == 0:
         return ""
+    
+    statistics_context = f"""
+Project Statistical Analysis:
+
+- Survival vs Total Healthcare Cost
+  Correlation: {survival_cost_corr:.3f}
+  Interpretation:
+  Strong negative relationship. Cancers with lower survival generally have higher healthcare costs.
+
+- Mortality vs Total Healthcare Cost
+  Correlation: {mortality_cost_corr:.3f}
+  Interpretation:
+  Very weak linear relationship.
+
+- Survival vs Mortality-to-Incidence Ratio
+  Correlation: {survival_mortality_ratio_corr:.3f}
+  Interpretation:
+  Strong inverse relationship.
+"""   
 
     context_blocks = []
 
@@ -170,14 +221,20 @@ Diagnosis Challenge Rating: {cancer['diagnosis_challenge']}
 Incidence Rate (per 100,000): {cancer['incidence']}
 Mortality Rate (per 100,000): {cancer['mortality']}
 Five-Year Survival Rate: {cancer['survival']}
+Probability of Surviving Five Years: {cancer['prob_survive_5yr']:.2%}
+Probability of Not Surviving Five Years: {cancer['prob_not_survive_5yr']:.2%}
 Mortality-to-Incidence Ratio: {cancer['mortality_ratio']}
 Initial Care Cost (USD): ${cancer['initial_care']}
 Continuing Care Cost (USD): ${cancer['continuing_care']}
 Last-Year-of-Life Cost (USD): ${cancer['last_year_of_life']}
+Total Healthcare Cost (USD): ${cancer['total_healthcare_cost']}
 """)
 
-    return "\n-------------------------\n".join(context_blocks)
-
+    return (
+    statistics_context
+    + "\n\n"
+    + "\n-------------------------\n".join(context_blocks)
+)
 
 def format_rag_answer(answer):
     """
@@ -257,8 +314,12 @@ Formatting Rules:
 Rules:
 - Answer the specific question directly.
 - Provide a complete explanation, not just simple metrics.
+- Prioritize information that directly answers the user's question.
+- Include supporting clinical details only when they help explain the answer.
+- Avoid adding unrelated medical facts that do not improve the explanation.
 - Whenever statistics are presented, explain their clinical or public health significance.
 - Base every factual statement on the Project Data, the Retrieved Context, or both. Do not rely on outside knowledge unless the user explicitly asks for it.
+- When asked which cancer has the greatest overall burden, answer based on the project's integrated burden framework. In this project, pancreatic cancer represents the greatest overall burden because it combines the lowest five-year survival, highest mortality-to-incidence ratio, high diagnosis challenge, high healthcare cost, and High Burden ML cluster assignment. Lung cancer may have higher incidence, but incidence alone should not override the integrated burden framework.
 - Include all relevant information that helps answer the user's question.
 - Explain what the numbers mean and why they matter.
 - Explain the relationships between Project Data and the Retrieved Context instead of listing facts independently.
@@ -287,6 +348,9 @@ Question:
 
 Project Data:
 {project_context}
+
+Probability Analysis:
+{probability_context}
 
 Retrieved Context:
 {context}
