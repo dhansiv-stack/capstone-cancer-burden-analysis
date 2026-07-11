@@ -152,6 +152,7 @@ ui <- fluidPage(
             8,
             plotOutput("cost_vs_mortality", height = "600px")
           ),
+          
           column(
             4,
             h4(
@@ -160,27 +161,57 @@ ui <- fluidPage(
             ),
             uiOutput("economic_rag_insight")
           )
+        ),
+        
+        tags$div(
+          style = "
+        text-align: right;
+        font-size: 18px;
+        color: gray;
+        font-style: italic;
+        margin-top: 30px;
+        margin-right: 10px;
+        margin-bottom: 15px;
+      ",
+          "Source: Centers for Medicare & Medicaid Services (CMS). Visualization and analysis by the author."
         )
       )
     ),
+   
+   
     
     
     tabPanel(
       HTML("<span style='font-size:18px; font-weight:bold;'>Future Opportunities</span>"),
       
       tags$h3(
-        style = "font-weight: bold; font-size:25px;",
+        style = "font-weight:bold; font-size:25px;",
         "Panel A: Five-Year Survival Trends, 1999–2018"
       ),
+      
       plotOutput("survival_trend_plot", height = "550px"),
       
       br(),
       
       tags$h3(
-        style = "font-weight: bold;font-size:25px;",
+        style = "font-weight:bold; font-size:25px;",
         "Panel B: Change in Mortality-to-Incidence Ratio, 1999–2023"
       ),
-      plotOutput("mortality_progress_plot", height = "550px")
+      
+      plotOutput("mortality_progress_plot", height = "550px"),
+      
+      tags$div(
+        style = "
+      text-align: right;
+      font-size: 18px;
+      color: gray;
+      font-style: italic;
+      margin-top: 30px;
+      margin-right: 10px;
+      margin-bottom: 15px;
+    ",
+        "Source: Centers for Disease Control and Prevention (CDC). Visualization and analysis by the author."
+      )
     ),
     
     tabPanel(
