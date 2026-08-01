@@ -74,21 +74,21 @@ The Cancer Burden Analytics Platform was developed through an iterative, end-to-
 
 ```mermaid
 flowchart TD
-    A[Phase 1<br/>Data Collection & Integration]
-    B[Phase 2<br/>Exploratory Data Analysis]
-    C[Phase 3<br/>Feature Engineering & SQL Analytics]
-    D[Phase 4<br/>Machine Learning Clustering]
-    E[Phase 5<br/>Cancer Knowledge Corpus]
-    F[Phase 6<br/>RAG Pipeline & Vector Indexing]
-    G[Phase 7<br/>LLM Integration & AI Assistant]
-    H[Phase 8<br/>Interactive R Shiny Dashboard]
-    I[Phase 9<br/>Testing, Refinement & Documentation]
+    A["Phase 1<br>Data Collection and Integration"]
+    B["Phase 2<br>Exploratory Data Analysis"]
+    C["Phase 3<br>Feature Engineering and SQL Analytics"]
+    D["Phase 4<br>Machine Learning Clustering"]
+    E["Phase 5<br>Cancer Knowledge Corpus"]
+    F["Phase 6<br>RAG Pipeline and Vector Indexing"]
+    G["Phase 7<br>LLM Integration and AI Assistant"]
+    H["Phase 8<br>Interactive R Shiny Dashboard"]
+    I["Phase 9<br>Testing, Refinement, and Documentation"]
 
     A --> B --> C --> D --> E --> F --> G --> H --> I
 
-    I -. Continuous refinement .-> B
-    H -. Dashboard improvements .-> E
-    G -. Knowledge base expansion .-> E
+    I -. "Continuous refinement" .-> B
+    H -. "Dashboard improvements" .-> E
+    G -. "Knowledge base expansion" .-> E
 ```
 
 *Throughout development, earlier phases were revisited whenever new datasets, analytical insights, or AI capabilities became available. This iterative approach enabled continuous refinement of the analytical framework, machine learning models, and evidence-based RAG system while maintaining consistency across the entire platform.*
